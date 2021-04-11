@@ -1,0 +1,11 @@
+﻿
+@{ 
+    ViewBag.Title = "Manager Dashboard";
+}
+<h2>Managers Dashboard</h2>
+
+<ul>
+    <li>@Html.ActionLink("View Pending TimeSheet requests", "ManPendingTimesheet", "Manager")</li>
+    <li>@Html.ActionLink("View Approved TimeSheets", "ManApprovedTimesheet", "Manager")</li>
+    <li>@Html.ActionLink("View Denied TimeSheets", "ManDeniedTimesheet", "Manager")</li>
+</ul>

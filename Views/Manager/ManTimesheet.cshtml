@@ -1,0 +1,68 @@
+﻿@model PayRollApplication.ViewModels.Manager.ManagerViewModel
+
+@using (Html.BeginForm("ChangeStatus", "Manager", FormMethod.Post, new { @id = ("Form") })) {
+    for (int i = 0; i < Model.pendingTimesheets.Count(); i++) {
+        <table onchange="updateTotal(@i)">
+            <tr>
+                <td><p>User Name:</p>@Html.TextBoxFor(a => a.names[i], new { @readonly = "readonly" })</td>
+                <td><p>User ID:</p>@Html.TextBoxFor(a => a.pendingTimesheets[i].UserId, new { @readonly = "readonly" })</td>
+                <td><p>Week:</p>@Html.TextBoxFor(a => a.pendingTimesheets[i].WeekId, new { @readonly = "readonly" })</td>
+            </tr>
+            <tr>
+                <th>Sunday</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Total Hours:</th>
+            </tr>
+            <tr>
+                <td>@Html.TextBoxFor(a => a.pendingTimesheets[i].SunHours, new { @id = "Sun" + i.ToString() })</td>
+                <td>@Html.TextBoxFor(a => a.pendingTimesheets[i].MonHours, new { @id = "Mon" + i.ToString() })</td>
+                <td>@Html.TextBoxFor(a => a.pendingTimesheets[i].TuesHours, new { @id = "Tues" + i.ToString() })</td>
+                <td>@Html.TextBoxFor(a => a.pendingTimesheets[i].WedsHours, new { @id = "Weds" + i.ToString() })</td>
+                <td>@Html.TextBoxFor(a => a.pendingTimesheets[i].ThursHours, new { @id = "Thurs" + i.ToString() })</td>
+                <td>@Html.TextBoxFor(a => a.pendingTimesheets[i].FriHours, new { @id = "Fri" + i.ToString() })</td>
+                <td>@Html.TextBoxFor(a => a.pendingTimesheets[i].SatHours, new { @id = "Sat" + i.ToString() })</td>
+                <td>@Html.TextBoxFor(a => a.pendingTimesheets[i].TotalHours, new { @id = "Total" + i.ToString(), @readonly = "readonly" })</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><button type="button" onclick="changeStatus('approve', @i)">Approve</button></td>
+                <td><button type="button" onclick="changeStatus('deny', @i)">Deny</button></td>
+                <td>@Html.TextBoxFor(a => a.pendingTimesheets[i].status, new { @id = ("Status" + i.ToString()), @readonly = "readonly" })</td>
+            </tr>
+        </table>
+        <hr>
+    }
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(a => a.passedItem, new { @id = ("item") });
+    @Html.HiddenFor(a => a.desiredStatus);
+}
+
+<script type="text/javascript">
+    function changeStatus(status, i) {
+        document.getElementById("item").value = i;
+        if (status == "approve") {
+            document.getElementById("Status" + i.toString()).value = "approved";
+            document.getElementById("Form").submit();
+        } else {
+            document.getElementById("Status" + i.toString()).value = "denied";
+            document.getElementById("Form").submit();
+        }
+    }
+    function updateTotal(i) {
+        document.getElementById("Total" + i.toString()).value =
+            parseInt(document.getElementById("Sun" + i.toString()).value) +
+            parseInt(document.getElementById("Mon" + i.toString()).value) +
+            parseInt(document.getElementById("Tues" + i.toString()).value) +
+            parseInt(document.getElementById("Weds" + i.toString()).value) +
+            parseInt(document.getElementById("Thurs" + i.toString()).value) +
+            parseInt(document.getElementById("Fri" + i.toString()).value) +
+            parseInt(document.getElementById("Sat" + i.toString()).value);
+
+    }
+</script>

@@ -1,0 +1,43 @@
+﻿@model PayRollApplication.Models.Week
+
+@using (Html.BeginForm("CreateTimesheet", "UserInterface", FormMethod.Post, new { onchange = "updateTotal()" })) {
+    <table>
+        <tr>@Html.TextBoxFor(a => a.WeekId, new {@readonly="readonly" })</tr>
+        <tr>
+            <th>Sunday</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Total Hours:</th>
+        </tr>
+        <tr>
+            <td>@Html.TextBoxFor(a => a.SunHours, new { @id="Sun"})</td>
+            <td>@Html.TextBoxFor(a => a.MonHours, new { @id = "Mon"})</td>
+            <td>@Html.TextBoxFor(a => a.TuesHours, new { @id = "Tues"})</td>
+            <td>@Html.TextBoxFor(a => a.WedsHours, new { @id = "Weds"})</td>
+            <td>@Html.TextBoxFor(a => a.ThursHours, new { @id = "Thurs"})</td> 
+            <td>@Html.TextBoxFor(a => a.FriHours, new { @id = "Fri"})</td>
+            <td>@Html.TextBoxFor(a => a.SatHours, new { @id = "Sat"})</td>
+            <td>@Html.TextBoxFor(a => a.TotalHours, new { @id = "Total" , @readonly="readonly"})</td>
+            <td>
+                <input type="submit" value="Submit" />
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        function updateTotal() {
+            document.getElementById("Total").value =
+                parseInt(document.getElementById("Sun").value) +
+                parseInt(document.getElementById("Mon").value) +
+                parseInt(document.getElementById("Tues").value) +
+                parseInt(document.getElementById("Weds").value) +
+                parseInt(document.getElementById("Thurs").value) +
+                parseInt(document.getElementById("Fri").value) +
+                parseInt(document.getElementById("Sat").value);
+
+        }
+    </script>
+}

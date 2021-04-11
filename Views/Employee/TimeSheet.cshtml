@@ -1,0 +1,56 @@
+﻿@model PayRollApplication.ViewModels.Employee.WeekViewModel
+
+@{
+    ViewBag.Title = "Week";
+}
+<p>Choose a Date</p>
+@using (Html.BeginForm("ChangeDate", "Employee", FormMethod.Post, new { @id = "Form1" })) {
+    @Html.TextBoxFor(a => a.MyDate, "{0:yyyy-MM-dd}", new { type = "date", onchange = "refreshDate()" })
+    @Html.AntiForgeryToken()
+}
+@using (Html.BeginForm("CreateTimesheet", "Employee", FormMethod.Post, new { onchange = "updateTotal()" })) {
+    <p>Week</p>
+    <table>
+        <tr>@Html.TextBoxFor(a => a.theWeek.WeekId, new { @readonly = "readonly" })</tr>
+        <tr>
+            <th>Sunday</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Total Hours:</th>
+        </tr>
+        <tr>
+            <td>@Html.TextBoxFor(a => a.theWeek.SunHours, new { @id = "Sun" })</td>
+            <td>@Html.TextBoxFor(a => a.theWeek.MonHours, new { @id = "Mon" })</td>
+            <td>@Html.TextBoxFor(a => a.theWeek.TuesHours, new { @id = "Tues" })</td>
+            <td>@Html.TextBoxFor(a => a.theWeek.WedsHours, new { @id = "Weds" })</td>
+            <td>@Html.TextBoxFor(a => a.theWeek.ThursHours, new { @id = "Thurs" })</td>
+            <td>@Html.TextBoxFor(a => a.theWeek.FriHours, new { @id = "Fri" })</td>
+            <td>@Html.TextBoxFor(a => a.theWeek.SatHours, new { @id = "Sat" })</td>
+            <td>@Html.TextBoxFor(a => a.theWeek.TotalHours, new { @id = "Total", @readonly = "readonly" })</td>
+            <td>@Html.AntiForgeryToken()<input type="submit" value="Submit" /></td>
+        </tr>
+        <tr>
+            <td>@Html.TextBoxFor(a => a.theWeek.status, new { @readonly = "readonly" })</td>
+        </tr>
+    </table>
+}
+<script type="text/javascript">
+    function updateTotal() {
+        document.getElementById("Total").value =
+            parseInt(document.getElementById("Sun").value) +
+            parseInt(document.getElementById("Mon").value) +
+            parseInt(document.getElementById("Tues").value) +
+            parseInt(document.getElementById("Weds").value) +
+            parseInt(document.getElementById("Thurs").value) +
+            parseInt(document.getElementById("Fri").value) +
+            parseInt(document.getElementById("Sat").value);
+
+    }
+    function refreshDate() {
+        document.getElementById("Form1").submit();
+    }
+</script>
