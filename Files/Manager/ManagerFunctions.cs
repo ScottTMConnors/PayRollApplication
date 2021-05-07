@@ -48,12 +48,17 @@ namespace PayRollApplication.Files.Manager {
             Debug.WriteLine("///Changing Week Status///");
             using (DataModelEntities db = new DataModelEntities()) {
                 Week obj = Files.Shared.GetWeek.ReturnObject(contextWeek.UserId, contextWeek.WeekId);
-                Debug.WriteLine(obj.WeekId);
-                Debug.WriteLine("Before status" + obj.status);
                 db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
                 obj.status = contextWeek.status;
-                Debug.WriteLine("After Status" + obj.status);
-                Debug.WriteLine(db.SaveChanges() + " changes have been made to the database");
+                obj.MonHours = contextWeek.MonHours;
+                obj.TuesHours = contextWeek.TuesHours;
+                obj.WedsHours = contextWeek.WedsHours;
+                obj.ThursHours = contextWeek.ThursHours;
+                obj.FriHours = contextWeek.FriHours;
+                obj.SatHours = contextWeek.SatHours;
+                obj.SunHours = contextWeek.SunHours;
+                obj.TotalHours = contextWeek.TotalHours;
+                db.SaveChanges();
             }
         }
     }

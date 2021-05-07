@@ -37,7 +37,7 @@ namespace PayRollApplication.Controllers
 
         public ActionResult Logout() {
             GetUser.logOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@model PayRollApplication.Models.UserProfile
 
-<h2>Index</h2>
+<h2>Secure Timesheet</h2>
 
 @using (Html.BeginForm("Index", "Login", FormMethod.Post)) {
     <fieldset>
@@ -14,7 +14,7 @@
         }
         <table>
             <tr>
-                <td>@Html.LabelFor(a => a.UserName)</td>
+                <td>User Name</td>
                 <td>@Html.TextBoxFor(a => a.UserName)</td>
                 <td>@Html.ValidationMessageFor(a => a.UserName)</td>
             </tr>

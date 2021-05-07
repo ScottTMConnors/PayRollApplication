@@ -132,7 +132,6 @@
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Files\Employee\EmployeeFunctions.cs" />
     <Compile Include="Files\Login\GetUser.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Files\Manager\ManagerFunctions.cs" />
     <Compile Include="Files\Shared\GetWeek.cs" />
@@ -219,14 +218,10 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Employee\TimeSheet.cshtml" />
     <Content Include="Views\Employee\EmployeeDashboard.cshtml" />
-    <Content Include="Views\Shared\TimeSheetPartial.cshtml" />
     <Content Include="Views\Manager\ManagerDashboard.cshtml" />
     <Content Include="Views\Manager\ManTimesheet.cshtml" />
   </ItemGroup>

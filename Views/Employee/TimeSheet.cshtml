@@ -11,46 +11,48 @@
 @using (Html.BeginForm("CreateTimesheet", "Employee", FormMethod.Post, new { onchange = "updateTotal()" })) {
     <p>Week</p>
     <table>
-        <tr>@Html.TextBoxFor(a => a.theWeek.WeekId, new { @readonly = "readonly" })</tr>
-        <tr>
-            <th>Sunday</th>
-            <th>Monday</th>
-            <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th>
-            <th>Saturday</th>
-            <th>Total Hours:</th>
-        </tr>
-        <tr>
-            <td>@Html.TextBoxFor(a => a.theWeek.SunHours, new { @id = "Sun" })</td>
-            <td>@Html.TextBoxFor(a => a.theWeek.MonHours, new { @id = "Mon" })</td>
-            <td>@Html.TextBoxFor(a => a.theWeek.TuesHours, new { @id = "Tues" })</td>
-            <td>@Html.TextBoxFor(a => a.theWeek.WedsHours, new { @id = "Weds" })</td>
-            <td>@Html.TextBoxFor(a => a.theWeek.ThursHours, new { @id = "Thurs" })</td>
-            <td>@Html.TextBoxFor(a => a.theWeek.FriHours, new { @id = "Fri" })</td>
-            <td>@Html.TextBoxFor(a => a.theWeek.SatHours, new { @id = "Sat" })</td>
-            <td>@Html.TextBoxFor(a => a.theWeek.TotalHours, new { @id = "Total", @readonly = "readonly" })</td>
-            <td>@Html.AntiForgeryToken()<input type="submit" value="Submit" /></td>
-        </tr>
-        <tr>
-            <td>@Html.TextBoxFor(a => a.theWeek.status, new { @readonly = "readonly" })</td>
-        </tr>
+        <tr>@Html.TextBoxFor(a => a.theWeek.WeekId, new { @readonly = "readonly", @type = "number", style = "width: 75px;" })</tr>
     </table>
-}
-<script type="text/javascript">
-    function updateTotal() {
-        document.getElementById("Total").value =
-            parseInt(document.getElementById("Sun").value) +
-            parseInt(document.getElementById("Mon").value) +
-            parseInt(document.getElementById("Tues").value) +
-            parseInt(document.getElementById("Weds").value) +
-            parseInt(document.getElementById("Thurs").value) +
-            parseInt(document.getElementById("Fri").value) +
-            parseInt(document.getElementById("Sat").value);
+            <table>
+                <tr>
+                    <th>Sunday</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Total Hours:</th>
+                </tr>
+                <tr>
+                    <td>@Html.DropDownListFor(a => a.theWeek.SunHours, Enumerable.Range(0, 24).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @id = "Sun", style = "width: 75px;" })</td>
+                    <td>@Html.DropDownListFor(a => a.theWeek.MonHours, Enumerable.Range(0, 24).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @id = "Mon", style = "width: 75px;" })</td>
+                    <td>@Html.DropDownListFor(a => a.theWeek.TuesHours, Enumerable.Range(0, 24).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @id = "Tues", style = "width: 75px;" })</td>
+                    <td>@Html.DropDownListFor(a => a.theWeek.WedsHours, Enumerable.Range(0, 24).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @id = "Weds", style = "width: 75px;" })</td>
+                    <td>@Html.DropDownListFor(a => a.theWeek.ThursHours, Enumerable.Range(0, 24).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @id = "Thurs", style = "width: 75px;" })</td>
+                    <td>@Html.DropDownListFor(a => a.theWeek.FriHours, Enumerable.Range(0, 24).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @id = "Fri", style = "width: 75px;" })</td>
+                    <td>@Html.DropDownListFor(a => a.theWeek.SatHours, Enumerable.Range(0, 24).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @id = "Sat", style = "width: 75px;" })</td>
+                    <td>@Html.TextBoxFor(a => a.theWeek.TotalHours, new { @id = "Total", @readonly = "readonly", @type = "number", style = "width: 75px;" })</td>
+                    <td>@Html.AntiForgeryToken()<input type="submit" value="Submit" /></td>
+                </tr>
+                <tr>
+                    <td>@Html.TextBoxFor(a => a.theWeek.status, new { @readonly = "readonly", style = "width: 75px;" })</td>
+                </tr>
+            </table>
+            }
+            <script type="text/javascript">
+                function updateTotal() {
+                    document.getElementById("Total").value =
+                        parseInt(document.getElementById("Sun").value) +
+                        parseInt(document.getElementById("Mon").value) +
+                        parseInt(document.getElementById("Tues").value) +
+                        parseInt(document.getElementById("Weds").value) +
+                        parseInt(document.getElementById("Thurs").value) +
+                        parseInt(document.getElementById("Fri").value) +
+                        parseInt(document.getElementById("Sat").value);
 
-    }
-    function refreshDate() {
-        document.getElementById("Form1").submit();
-    }
-</script>
+                }
+                function refreshDate() {
+                    document.getElementById("Form1").submit();
+                }
+            </script>
